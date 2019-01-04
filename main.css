@@ -1,0 +1,11 @@
+/* entry list from localStorage  */
+ul.list-group li{
+  background-color: #f4511e;
+  color: white;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+ul.list-group li:hover{
+  opacity: 1;
+}
