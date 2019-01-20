@@ -1,8 +1,10 @@
 //MY FUNCTIONS FOR ACCESSING LOCAL STORAGE
 
 let writeToLocalStorage = (key, data) => {//we need a key for writing to localStorage as well as data to be added to that key
-  dataInJsonForm = encodeAsJson(data);
-  localStorage.setItem(key, dataInJsonForm); //writing into the localStorage
+  if(consentStatus){
+    dataInJsonForm = encodeAsJson(data);
+    localStorage.setItem(key, dataInJsonForm); //writing into the localStorage
+  }
 };
 
 let readFromLocalStorage = (key) => {//we need a key in order to fetch the data associated with it from localStorage
@@ -26,3 +28,9 @@ let decodeJson = (string) => {
   let decodedArray = JSON.parse(string);
   return decodedArray;
 };
+
+
+//OTHER tools
+let refreshPage = () => {
+  location.reload();
+}

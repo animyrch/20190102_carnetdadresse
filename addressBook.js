@@ -18,7 +18,9 @@ class ListOfAllContacts {
   // }
 
   static deleteAllContacts(){
-
+    consentStatus = true;
+    writeToLocalStorage("contactsforCarnet", []);
+    consentStatus = false;
   }
 
   static updateAllContacts(listOfAllContacts){
@@ -28,8 +30,12 @@ class ListOfAllContacts {
 //initiating an instance of the object for all contacts
 var listOfAllContactsObject = new ListOfAllContacts();
 //populating the object of all contacts with current contacts
-listOfAllContactsObject.populateList(listOfAllContacts);
-// listOfAllContactsObject.sort(compareValues('nom'));
+// console.log(listOfAllContacts);
+if(listOfAllContacts!=="Unable to get data"){
+  listOfAllContactsObject.populateList(listOfAllContacts);
+  // listOfAllContactsObject.sort(compareValues('nom'));
+}
+
 
 
 
@@ -43,8 +49,15 @@ class Contact {
   }
 
   writeContact(listOfAllContacts){
+
+    if(typeof listOfAllContacts==='string'){
+      listOfAllContacts=[];
+      // console.log("testing listOfAllContacts when there are no contacts" + typeof listOfAllContacts);
+    }
     listOfAllContacts.push(this);
     ListOfAllContacts.updateAllContacts(listOfAllContacts);
+    //upon writing new contact, I refresh list of contacts on screen
+    refreshPage();
   }
 
 }
@@ -52,6 +65,7 @@ class Contact {
 //creation of a new contact object
 let createNewContact = (sexe, nom, prenom, tel) => {
   let contact = new Contact(sexe, nom, prenom, tel);
+  // console.dir(contact);
   contact.writeContact(listOfAllContacts);
 
 };
